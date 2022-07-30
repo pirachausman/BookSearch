@@ -47,18 +47,27 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: Card(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(Dimensions.radius25),
-                        topRight: Radius.circular(Dimensions.radius25))),
-                color: Colors.white,
+            child: Container(
+              width: Dimensions.width412,
+              height: Dimensions.height230,
+              alignment: Alignment.bottomCenter,
+              decoration: BoxDecoration(
+                color: AppColors.backWhiteColor,
+                  borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(Dimensions.radius25),
+                            topRight: Radius.circular(Dimensions.radius25)),
+              ),
+                // shape: RoundedRectangleBorder(
+                //     borderRadius: BorderRadius.only(
+                //         topLeft: Radius.circular(Dimensions.radius25),
+                //         topRight: Radius.circular(Dimensions.radius25))),
+                // color: Colors.white,
                 child: ConstrainedBox(
                   constraints: BoxConstraints(
                       minHeight: Dimensions.height230,
                       maxHeight: Dimensions.height230,
-                      minWidth: Dimensions.width412,
-                      maxWidth: Dimensions.width412),
+                      minWidth:double.infinity, //Dimensions.width412,
+                      maxWidth:double.infinity,), //Dimensions.width412),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
