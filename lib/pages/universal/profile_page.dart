@@ -41,7 +41,7 @@ class _ProfilePageState extends ProfilePageAbstractState {
                   style: textStyle.copyWith(
                     fontWeight: FontWeight.w700,
                       // fontFamily: GoogleFonts.ibarraRealNova().fontFamily,
-                      fontSize: Dimensions.height24),
+                      fontSize: Dimensions.height26),
                 ),
                 SizedBox(
                   height: Dimensions.height24,
