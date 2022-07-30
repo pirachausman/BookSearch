@@ -59,7 +59,7 @@ abstract class _UserStore with Store {
             email: value.email,
             photoUrl: value.photoUrl,
             serverAuthCode: value.serverAuthCode));
-        return value?.id != null ? 0 : 1;
+        return value.id != null ? 0 : 1;
       });
     } catch (error) {
       print(error);

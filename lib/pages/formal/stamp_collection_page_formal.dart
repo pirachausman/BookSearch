@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:test_app/model/Book.dart';
 import 'package:test_app/pages/abstract/stamp_collection_page_abstract.dart';
 import 'package:test_app/pages/formal/book_details_page_formal.dart';
+import 'package:test_app/utils/colors.dart';
+import 'package:test_app/utils/dimensions.dart';
 import 'package:test_app/utils/utils.dart';
 import 'package:test_app/widgets/stamp.dart';
 
@@ -16,7 +18,7 @@ class _StampCollectionPageFormalState
   @override
   Widget build(BuildContext context) {
     const textStyle = const TextStyle(
-        fontSize: 34.0, fontFamily: 'Butler', fontWeight: FontWeight.w800);
+        fontSize: 34.0, fontFamily: 'Segoe UI', fontWeight: FontWeight.w800);
 
     Widget body;
 
@@ -25,15 +27,16 @@ class _StampCollectionPageFormalState
     }
 
     body = GridView.extent(
-      maxCrossAxisExtent: 150.0,
       padding: EdgeInsets.zero,
+      maxCrossAxisExtent:  Dimensions.height150,
+      crossAxisSpacing:Dimensions.height5 ,
+      mainAxisSpacing: Dimensions.width5,
       shrinkWrap: true,
       physics: ScrollPhysics(),
-      mainAxisSpacing: 20.0,
       children: items
           .map((Book book) => Stamp(
                 book.url!,
-                width: 105.0,
+                width:  Dimensions.width90,
                 onClick: () {
                   Navigator.of(context).push(FadeRoute(
                     builder: (BuildContext context) =>
@@ -46,26 +49,27 @@ class _StampCollectionPageFormalState
     );
 
     body = Container(
-      padding: const EdgeInsets.all(16.0),
+      padding: EdgeInsets.symmetric(horizontal: Dimensions.width16, vertical: Dimensions.height16),
       child: body,
-      color: Color(0xFFF5F5F5),
+      color: AppColors.backWhiteColor,
     );
 
     return Scaffold(
+      backgroundColor: AppColors.backWhiteColor,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           SizedBox(
-            height: 80.0,
+            height: Dimensions.heigh80,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: EdgeInsets.symmetric(horizontal: Dimensions.width16),
             child: Text(
               "My Stamps",
               style: textStyle.copyWith(
-                  fontFamily: GoogleFonts.ibarraRealNova().fontFamily,
-                  fontSize: 26),
+                  //fontFamily: GoogleFonts.ibarraRealNova().fontFamily,
+                  fontSize: Dimensions.height26),
             ),
           ),
           Expanded(

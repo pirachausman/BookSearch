@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:test_app/main.dart';
 import 'package:test_app/mobx/user_store.dart';
 import 'package:test_app/pages/abstract/profile_page_abstract.dart';
+import 'package:test_app/utils/colors.dart';
+import 'package:test_app/utils/dimensions.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -19,11 +21,12 @@ class _ProfilePageState extends ProfilePageAbstractState {
   @override
   Widget build(BuildContext context) {
     const textStyle = const TextStyle(
-        fontSize: 34.0, fontFamily: 'Butler', fontWeight: FontWeight.w800);
+        fontSize: 34.0, fontFamily: 'Segoe UI', fontWeight: FontWeight.w800);
 
     return Scaffold(
+      backgroundColor: AppColors.backWhiteColor,
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
         child: Stack(
           children: [
             Column(
@@ -31,21 +34,23 @@ class _ProfilePageState extends ProfilePageAbstractState {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 80.0,
+                  height: Dimensions.heigh80,
                 ),
                 Text(
                   "My Profile",
                   style: textStyle.copyWith(
-                      fontFamily: GoogleFonts.ibarraRealNova().fontFamily,
-                      fontSize: 26),
+                    fontWeight: FontWeight.w700,
+                      // fontFamily: GoogleFonts.ibarraRealNova().fontFamily,
+                      fontSize: Dimensions.height24),
                 ),
                 SizedBox(
-                  height: 24.0,
+                  height: Dimensions.height24,
                 ),
                 Card(
+                  shadowColor: AppColors.backWhiteColor,
                   color: Color(0XFFF6F6F6),
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8)),
+                      borderRadius: BorderRadius.circular(Dimensions.radius6)),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -53,10 +58,10 @@ class _ProfilePageState extends ProfilePageAbstractState {
                       Expanded(
                         flex: 3,
                         child: Padding(
-                          padding: const EdgeInsets.all(16.0),
+                          padding: EdgeInsets.symmetric(horizontal: Dimensions.width16, vertical: Dimensions.height16),
                           child: Container(
-                            width: 85.0,
-                            height: 85.0,
+                            // width: Dimensions.width85,
+                            // height: Dimensions.height85,
                             decoration: new BoxDecoration(
                               color: Color(0XFF3B56FF),
                               shape: BoxShape.circle,
@@ -67,18 +72,18 @@ class _ProfilePageState extends ProfilePageAbstractState {
                                       userStore.user?.displayName?.substring(0, 1).toUpperCase() ??
                                           "",
                                       style: TextStyle(
-                                          fontSize: 42,
+                                          fontSize: Dimensions.height45,
                                           color: Colors.white,
-                                          fontFamily: GoogleFonts.openSans()
-                                              .fontFamily),
-                                    )
+                                          // fontFamily: GoogleFonts.openSans()
+                                          //     .fontFamily),
+                                      ))
                                   : CachedNetworkImage(
                                       imageUrl: userStore.user!.photoUrl!,
                                       fit: BoxFit.fill,
                                       imageBuilder: (context, imageProvider) =>
                                           Container(
-                                            width: 80.0,
-                                            height: 80.0,
+                                            width: Dimensions.width66,
+                                            height: Dimensions.height66,
                                             decoration: BoxDecoration(
                                               shape: BoxShape.circle,
                                               image: DecorationImage(
@@ -102,35 +107,35 @@ class _ProfilePageState extends ProfilePageAbstractState {
                               return Text(
                                 userStore.user?.displayName?.toUpperCase() ?? "",
                                 style: TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily:
-                                        GoogleFonts.openSans().fontFamily),
-                              );
+                                    fontSize: Dimensions.height21,
+                                    color: AppColors.mainBlackColor,
+                                    fontWeight: FontWeight.w400,
+                                    // fontFamily:
+                                    //     GoogleFonts.openSans().fontFamily),
+                                ));
                             }),
                             SizedBox(
-                              height: 6,
+                              height: Dimensions.height6,
                             ),
                             Observer(builder: (context) {
                               return Text(
                                 "${userStore.user?.email}",
                                 style: TextStyle(
-                                    fontSize: 12,
+                                    fontSize: Dimensions.height12,
                                     color: Color(0XFF31A7FB),
-                                    fontFamily:
-                                        GoogleFonts.openSans().fontFamily),
-                              );
+                                    // fontFamily:
+                                    //     GoogleFonts.openSans().fontFamily),
+                                ));
                             }),
                           ],
                         ),
                       )
                     ],
                   ),
-                  elevation: 4,
+                  elevation: 0,
                 ),
                 SizedBox(
-                  height: 16.0,
+                  height: Dimensions.height16,
                 ),
                 Row(
                   children: [
@@ -138,102 +143,105 @@ class _ProfilePageState extends ProfilePageAbstractState {
                       flex: 5,
                       child: ConstrainedBox(
                         constraints: BoxConstraints(
-                            maxWidth: 180,
-                            minWidth: 160,
-                            maxHeight: 160,
-                            minHeight: 160),
+                            maxWidth: Dimensions.width166,
+                            minWidth: Dimensions.width166,
+                            maxHeight: Dimensions.height98,
+                            minHeight: Dimensions.height98),
                         child: Card(
                           color: Color(0XFFF6F6F6),
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)),
+                              borderRadius: BorderRadius.circular(Dimensions.radius6)),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Expanded(
-                                flex: 6,
+                                flex: 5,
                                 child: Padding(
-                                  padding: const EdgeInsets.all(26.0),
+                                  padding:  EdgeInsets.symmetric(horizontal: Dimensions.width5, vertical: Dimensions.height10),
                                   child: Center(
                                       child: Text(
                                     "$count",
                                     style: TextStyle(
-                                        fontSize: 32,
-                                        fontWeight: FontWeight.bold,
+                                        fontSize: Dimensions.height54,
+                                        fontWeight: FontWeight.w400,
                                         color: Colors.black,
-                                        fontFamily:
-                                            GoogleFonts.openSans().fontFamily),
+                                        // fontFamily:
+                                        //     GoogleFonts.openSans().fontFamily
+                                    ),
                                   )),
                                 ),
                               ),
                               Expanded(
                                 flex: 4,
                                 child: Text(
-                                  "Books reading",
+                                  "book(s) reading",
                                   style: TextStyle(
-                                      fontSize: 16,
+                                      fontSize: Dimensions.height17,
                                       color: Colors.black,
                                       fontWeight: FontWeight.w400,
-                                      fontFamily:
-                                          GoogleFonts.openSans().fontFamily),
+                                      // fontFamily:
+                                      //     GoogleFonts.openSans().fontFamily
+                                  ),
                                 ),
                               )
                             ],
                           ),
-                          elevation: 4,
+                          elevation: 0,
                         ),
                       ),
                     ),
                     SizedBox(
-                      width: 10,
+                      width: Dimensions.width10,
                     ),
                     Expanded(
                       flex: 5,
                       child: ConstrainedBox(
                         constraints: BoxConstraints(
-                            maxWidth: 180,
-                            minWidth: 160,
-                            maxHeight: 160,
-                            minHeight: 160),
+                            maxWidth: Dimensions.width166,
+                            minWidth: Dimensions.width166,
+                            maxHeight: Dimensions.height98,
+                            minHeight: Dimensions.height98),
                         child: Card(
                           color: Color(0XFFF6F6F6),
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)),
+                              borderRadius: BorderRadius.circular(Dimensions.radius6)),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Expanded(
-                                flex: 6,
+                                flex: 5,
                                 child: Padding(
-                                  padding: const EdgeInsets.all(26.0),
+                                  padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
                                   child: Center(
                                       child: Text(
                                     "$count",
                                     style: TextStyle(
-                                        fontSize: 32,
-                                        fontWeight: FontWeight.bold,
+                                        fontSize: Dimensions.height54,
+                                        fontWeight: FontWeight.w400,
                                         color: Colors.black,
-                                        fontFamily:
-                                            GoogleFonts.openSans().fontFamily),
+                                        // // fontFamily:
+                                        // //     GoogleFonts.openSans().fontFamily
+                                    ),
                                   )),
                                 ),
                               ),
                               Expanded(
                                 flex: 4,
                                 child: Text(
-                                  "Stamp collected",
+                                  "book stamps collected",
                                   style: TextStyle(
-                                      fontSize: 15,
+                                      fontSize: Dimensions.height17,
                                       color: Colors.black,
                                       fontWeight: FontWeight.w400,
-                                      fontFamily:
-                                          GoogleFonts.openSans().fontFamily),
-                                ),
+                                      // fontFamily:
+                                      //     GoogleFonts.openSans(). ),
+                                  )),
                               )
                             ],
                           ),
-                          elevation: 4,
+                          elevation: 0,
                         ),
                       ),
                     ),
@@ -244,28 +252,33 @@ class _ProfilePageState extends ProfilePageAbstractState {
             Align(
               alignment: Alignment.bottomCenter,
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 36.0),
+                padding: EdgeInsets.symmetric(vertical: Dimensions.height36),
                 child: ElevatedButton.icon(
+
                   style: ButtonStyle(
+                    minimumSize: MaterialStateProperty.all(Size(Dimensions.width105, Dimensions.height44)),
                     backgroundColor:
                         MaterialStateProperty.all<Color>(Color(0XFFFB4A59)),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18.0),
+                        borderRadius: BorderRadius.circular(Dimensions.radius40),
                       ),
                     ),
                   ),
                   icon: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.symmetric(horizontal: Dimensions.width8, vertical: Dimensions.height8),
                     child: Image.asset(
                       "assets/logout.png",
-                      height: 16,
-                      width: 16,
+                      height: Dimensions.height13,
+                      width: Dimensions.width15,
                     ),
                   ),
                   label: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text("Logout"),
+                    padding: EdgeInsets.symmetric(horizontal: Dimensions.width8, vertical: Dimensions.height8),
+                    child: Text("Logout", style: TextStyle(
+                      fontSize: Dimensions.height14,
+                      fontWeight: FontWeight.w700
+                    ),),
                   ),
                   onPressed: () async {
                     await userStore.handleSignOut().then((value) {

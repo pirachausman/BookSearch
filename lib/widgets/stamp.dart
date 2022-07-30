@@ -1,9 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:test_app/utils/dimensions.dart';
 
 class Stamp extends StatefulWidget {
   Stamp(this.imageUrl,
-      {this.width = 150.0, this.locked = false, required this.onClick});
+      {this.width = 111, this.locked = false, required this.onClick});
 
   final bool withStartAnimation = false;
   final String imageUrl;
@@ -50,8 +51,9 @@ class _StampState extends State<Stamp> with SingleTickerProviderStateMixin {
           child: ConstrainedBox(
             constraints: BoxConstraints.tight(Size(width, height)),
             child: Material(
+
               elevation: 8.0,
-              color: Colors.transparent,
+              color: Colors.white,
               child: Center(
                 child: _clippedNetwork(context, width, height, holeRadius),
               ),
@@ -74,7 +76,7 @@ class _StampState extends State<Stamp> with SingleTickerProviderStateMixin {
         width: card_width,
         fit: BoxFit.cover,
         imageUrl: widget.imageUrl,
-        placeholder: (context, url) => CircularProgressIndicator(),
+        placeholder: (context, url) => Center(child: CircularProgressIndicator()),
         errorWidget: (context, url, error) => Icon(Icons.error),
       ),
     );

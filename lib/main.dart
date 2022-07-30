@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get/get.dart';
 import 'package:test_app/mobx/book_store.dart';
 import 'package:test_app/mobx/user_store.dart';
 import 'package:test_app/pages/navigation.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Observer(builder: (context) {
-      return MaterialApp(
+      return GetMaterialApp(
         title: 'Book search',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(

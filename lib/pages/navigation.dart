@@ -3,10 +3,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:test_app/data/repository.dart';
 import 'package:test_app/mobx/user_store.dart';
+// import 'package:test_app/model/book_extended.dart';
 import 'package:test_app/pages/formal/search_book_page_formal.dart';
 import 'package:test_app/pages/formal/stamp_collection_page_formal.dart';
 import 'package:test_app/pages/universal/book_screen.dart';
 import 'package:test_app/pages/universal/profile_page.dart';
+import 'package:test_app/utils/colors.dart';
+import 'package:test_app/utils/dimensions.dart';
 
 class NavigationScreen extends StatefulWidget {
   @override
@@ -58,6 +61,7 @@ class _NavigationScreenState extends State<NavigationScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.backWhiteColor,
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
@@ -66,83 +70,86 @@ class _NavigationScreenState extends State<NavigationScreen>
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              blurRadius: 20,
+              blurRadius: Dimensions.radius20,
               color: Colors.black.withOpacity(.1),
             )
           ],
         ),
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
+
+            padding: EdgeInsets.symmetric(horizontal: Dimensions.width15, vertical: Dimensions.height8),
             child: GNav(
               rippleColor: Colors.grey[300]!,
               hoverColor: Colors.grey[100]!,
-              gap: 6,
+              gap: Dimensions.width6,
               activeColor: Colors.black,
-              iconSize: 24,
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              iconSize: Dimensions.height24,
+
+              padding: EdgeInsets.symmetric(horizontal: Dimensions.width20, vertical: Dimensions.height10),
               duration: Duration(milliseconds: 100),
               tabBackgroundColor: Colors.grey[100]!,
               color: Colors.black,
               tabs: [
+
                 GButton(
                   icon: Icons.home,
-                  text: 'Home',
+                  text: 'home',
                   textStyle: TextStyle(
-                      fontSize: 12,
-                      fontFamily: GoogleFonts.montserrat().fontFamily,
+                      fontSize: Dimensions.height10,
+                      fontFamily: 'Segoe UI',
                       color: Colors.white,
                       fontWeight: FontWeight.w700),
                   backgroundColor: Color(0xffFC92AF),
                   leading: Image.asset(
                     "assets/nav.png",
-                      height:24,
-                    width: 24,
+                    height: Dimensions.height20,
+                    width: Dimensions.width20,
                   ),
                 ),
                 GButton(
                   icon: Icons.explore,
-                  text: 'Explore',
+                  text: 'explore',
                   textStyle: TextStyle(
-                      fontSize: 12,
-                      fontFamily: GoogleFonts.montserrat().fontFamily,
+                      fontSize: Dimensions.height10,
+                      fontFamily: 'Segoe UI',
                       color: Colors.white,
                       fontWeight: FontWeight.w700),
                   backgroundColor: Color(0xff6E8BFF),
                   leading: Image.asset(
                     "assets/exp.png",
-                    height:24,
-                    width: 24,
+                    height: Dimensions.height20,
+                    width: Dimensions.width20,
                   ),
                 ),
                 GButton(
                   icon: Icons.airplane_ticket,
-                  text: 'My Stamp',
+                  text: 'my stamp',
                   textStyle: TextStyle(
-                      fontSize: 12,
-                      fontFamily: GoogleFonts.montserrat().fontFamily,
+                      fontSize: Dimensions.height10,
+                      fontFamily: 'Segoe UI',
                       color: Colors.white,
                       fontWeight: FontWeight.w700),
                   backgroundColor: Color(0xffB86AEC),
                   leading: Image.asset(
                     "assets/stamp.png",
-                    height:24,
-                    width: 24,
+                    height: Dimensions.height20,
+                    width: Dimensions.width20,
                   ),
                 ),
                 GButton(
                   icon: Icons.verified_user,
-                  text: 'Profile',
+                  text: 'profile',
                   textStyle: TextStyle(
-                      fontSize: 12,
-                      fontFamily: GoogleFonts.montserrat().fontFamily,
+                      fontSize: Dimensions.height10,
+                      fontFamily: 'Segoe UI',
                       color: Colors.white,
                       fontWeight: FontWeight.w700),
                   backgroundColor: Color(0xffFFB95D),
                   leading: Image.asset(
                     "assets/prof.png",
-                    height:24,
-                    width: 24,
+                    height: Dimensions.height20,
+                    width: Dimensions.width20,
                   ),
                 ),
               ],

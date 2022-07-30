@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:test_app/data/repository.dart';
 import 'package:test_app/model/Book.dart';
 import 'package:test_app/pages/abstract/book_details_page_abstract.dart';
+import 'package:test_app/utils/dimensions.dart';
 
 
 
@@ -35,12 +36,12 @@ class _BookDetailsPageFormalState extends AbstractBookDetailsPageState<BookDetai
       ),
       body: new SingleChildScrollView(
         child: new Padding(
-          padding: const EdgeInsets.all(32.0),
+          padding: EdgeInsets.symmetric(horizontal: Dimensions.width32, vertical: Dimensions.height32 ),
           child: new Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               new Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.symmetric(horizontal: Dimensions.width8, vertical: Dimensions.height8 ),
                 child: new Center(
                   child: new Hero(
                     tag: widget.book.id!,
@@ -48,11 +49,11 @@ class _BookDetailsPageFormalState extends AbstractBookDetailsPageState<BookDetai
                   ),
                 ),
               ),
-              new SizedBox(height: 16.0,),
-              new Text(widget.book.title!, style: const TextStyle(fontSize: 24.0, fontFamily: "CrimsonText"),),
-              new SizedBox(height: 8.0,),
-              new Text("${widget.book.author} - Sience Ficition", style: const TextStyle(fontSize: 16.0, fontFamily: "CrimsonText", fontWeight: FontWeight.w400),),
-              new Divider(height: 32.0, color: Colors.black38,),
+              new SizedBox(height: Dimensions.height16),
+              new Text(widget.book.title!, style: TextStyle(fontSize: Dimensions.height24, fontFamily: "CrimsonText"),),
+              new SizedBox(height: Dimensions.height8,),
+              new Text("${widget.book.author} - Sience Ficition", style: TextStyle(fontSize: Dimensions.height16, fontFamily: "CrimsonText", fontWeight: FontWeight.w400),),
+              new Divider(height: Dimensions.height32, color: Colors.black38,),
               new Row(
                 children: <Widget>[
                   new Expanded(
@@ -90,10 +91,10 @@ class _BookDetailsPageFormalState extends AbstractBookDetailsPageState<BookDetai
                   ),
                 ],
               ),
-              new Divider(height: 32.0, color: Colors.black38,),
-              new Text("Description", style: const TextStyle(fontSize: 20.0, fontFamily: "CrimsonText"),),
-              new SizedBox(height: 8.0,),
-              new Text(widget.book.description!, style: const TextStyle(fontSize: 16.0),),
+              new Divider(height: Dimensions.height32, color: Colors.black38,),
+              new Text("Description", style: TextStyle(fontSize: Dimensions.height20, fontFamily: "CrimsonText"),),
+              new SizedBox(height: Dimensions.height8,),
+              new Text(widget.book.description!, style: TextStyle(fontSize: Dimensions.height16),),
             ],
           ),
         ),

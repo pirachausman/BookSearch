@@ -10,6 +10,9 @@ import 'package:test_app/utils/utils.dart';
 import 'package:test_app/widgets/book_card_compact.dart';
 import 'package:test_app/widgets/chips_widget.dart';
 
+import '../../utils/colors.dart';
+import '../../utils/dimensions.dart';
+
 class SearchBookPageNew extends StatefulWidget {
   @override
   _SearchBookStateNew createState() => _SearchBookStateNew();
@@ -21,74 +24,81 @@ class _SearchBookStateNew extends AbstractSearchBookState<SearchBookPageNew> {
   @override
   Widget build(BuildContext context) {
     const textStyle = const TextStyle(
-        fontSize: 22.0, fontFamily: 'Butler', fontWeight: FontWeight.bold);
+        fontSize: 22.0, fontFamily: 'Segoe UI', fontWeight: FontWeight.bold);
     return Observer(builder: (context) {
       bookStore.category;
       return Scaffold(
         key: scaffoldKey,
+        backgroundColor: AppColors.backWhiteColor,
         body: Column(
           children: [
             SizedBox(
-              height: 60,
+              height: Dimensions.height60,
             ),
             Expanded(
               child: CustomScrollView(
                 slivers: <Widget>[
                   SliverPadding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding:  EdgeInsets.symmetric(horizontal: Dimensions.width16, vertical: Dimensions.height16),
                     sliver: SliverToBoxAdapter(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           SizedBox(
-                            height: 8.0,
+                            height: Dimensions.height8,
                           ),
                           Text(
                             "Explore",
                             style: textStyle.copyWith(
-                                fontFamily:
-                                    GoogleFonts.ibarraRealNova().fontFamily,
-                                fontSize: 26),
+                                // fontFamily:
+                                //     GoogleFonts.ibarraRealNova().fontFamily,
+                                fontSize: Dimensions.height26,
+                              fontWeight: FontWeight.w700
+                            ),
                           ),
-                          SizedBox(height: 16.0),
+                          SizedBox(height: Dimensions.height16),
                           Card(
-                              elevation: 4.0,
+                              color: AppColors.searchBarColor,
+                              elevation: Dimensions.height16,
                               child: Padding(
-                                padding: const EdgeInsets.all(8.0),
+                                padding:  EdgeInsets.all(0),
                                 child: TextField(
                                   decoration: InputDecoration(
                                       hintText: "Search your favourite book",
                                       hintStyle: TextStyle(
-                                          color: Colors.black26,
-                                          fontFamily:
-                                              GoogleFonts.ibarraRealNova()
-                                                  .fontFamily,
-                                          fontSize: 14),
+                                          color: AppColors.mainBlackColor,
+                                          // fontFamily: GoogleFonts.ibarraRealNova()
+                                          //     .fontFamily,
+                                          fontSize: Dimensions.height14,
+                                          fontWeight: FontWeight.w400
+                                      ),
                                       prefixIcon: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Icon(Icons.search),
+                                        padding:  EdgeInsets.symmetric(horizontal: Dimensions.width8, vertical: Dimensions.height8),
+                                        child: Icon(Icons.search, size: Dimensions.height16_4, color: AppColors.mainBlackColor,),
                                       ),
                                       border: InputBorder.none),
                                   onChanged: (string) => (subject.add(string)),
                                 ),
                               )),
                           SizedBox(
-                            height: 16.0,
+                            height: Dimensions.height16,
                           ),
                           Padding(
                             padding:
-                                const EdgeInsets.symmetric(horizontal: 6.0),
+                                 EdgeInsets.symmetric(horizontal: Dimensions.height6),
                             child: Text(
                               bookStore.currentCategory?.title == null
                                   ? "Popular Genre"
                                   : bookStore.currentCategory!.title!,
                               style: textStyle.copyWith(
-                                fontFamily:
-                                    GoogleFonts.ibarraRealNova().fontFamily,
+                                // fontFamily:
+                                //     GoogleFonts.ibarraRealNova().fontFamily,
+                                fontSize: Dimensions.height20,
+                                fontWeight: FontWeight.w400
                               ),
                             ),
                           ),
-                          SizedBox(height: 8.0),
+                          SizedBox(height: Dimensions.height8),
                           getGridForCategories(),
                           _buildExpandable(),
                         ],
@@ -145,7 +155,7 @@ class _SearchBookStateNew extends AbstractSearchBookState<SearchBookPageNew> {
 
   Widget getExpandedCategories(List<Category> categories) {
     return Padding(
-      padding: const EdgeInsets.all(6.0),
+      padding: EdgeInsets.symmetric(horizontal: Dimensions.width6, vertical: Dimensions.height6),
       child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
@@ -168,7 +178,7 @@ class _SearchBookStateNew extends AbstractSearchBookState<SearchBookPageNew> {
     return ExpandableNotifier(
       child: Expandable(
         collapsed: Padding(
-          padding: const EdgeInsets.only(right: 24.0, top: 8),
+          padding:  EdgeInsets.only(right: Dimensions.width24, top: Dimensions.height8),
           child: Align(
             alignment: Alignment.centerRight,
             child: ExpandableButton(
@@ -186,7 +196,7 @@ class _SearchBookStateNew extends AbstractSearchBookState<SearchBookPageNew> {
               getExpandedCategories(bookStore.allCategories.sublist(3, 6)),
               getExpandedCategories(bookStore.allCategories.sublist(6, 9)),
               Padding(
-                padding: const EdgeInsets.only(right: 16.0, top: 8),
+                padding:  EdgeInsets.only(right: Dimensions.width16, top: Dimensions.height8),
                 child: Align(
                     alignment: Alignment.bottomRight,
                     child: ExpandableButton(

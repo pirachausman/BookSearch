@@ -10,6 +10,7 @@ import 'package:test_app/mobx/user_store.dart';
 import 'package:test_app/model/categories.dart';
 import 'package:test_app/pages/abstract/search_book_page_abstract.dart';
 import 'package:test_app/pages/formal/book_details_page_formal.dart';
+import 'package:test_app/utils/colors.dart';
 import 'package:test_app/utils/index_offset_curve.dart';
 import 'package:test_app/utils/utils.dart';
 import 'package:test_app/widgets/chips_widget.dart';
@@ -17,6 +18,7 @@ import 'package:test_app/widgets/collection_preview.dart';
 import 'package:test_app/widgets/stamp.dart';
 
 import '../../model/Book.dart';
+import '../../utils/dimensions.dart';
 
 class BookScreen extends StatefulWidget {
   BookScreen(this.interfaceType, this.cardFirstOpenController, {Key? key})
@@ -37,190 +39,202 @@ class _BookScreenStateNew extends AbstractSearchBookState<BookScreen> {
   @override
   Widget build(BuildContext context) {
     const textStyle = const TextStyle(
-        fontSize: 22.0, fontFamily: 'CrimsonText', fontWeight: FontWeight.w800);
+        fontSize: 22.0, fontFamily: 'Segoe UI', fontWeight: FontWeight.w800);
     return Observer(builder: (context) {
       bookStore.category;
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 60,
-          ),
-          ConstrainedBox(
-              constraints: BoxConstraints(
-                  maxHeight: 80, maxWidth: 100, minHeight: 50, minWidth: 100),
-              child: Image.asset(
-                "assets/stamp.png",
-                height: 250,
-                width: 250,
-              )),
-          Expanded(
-            child: CustomScrollView(
-              slivers: <Widget>[
-                SliverList(
-                    delegate: SliverChildListDelegate(
-                  [
-                    wrapInAnimation(
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Observer(builder: (context) {
-                            return Text(
-                              "Hello, ${userStore.user?.displayName}" ?? "",
-                              style: textStyle.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 32,
-                                  fontFamily:
-                                      GoogleFonts.ibarraRealNova().fontFamily),
-                            );
-                          }),
-                        ),
-                        0),
-                    SizedBox(height: 16.0),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Card(
-                          elevation: 4.0,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: TextField(
-                              decoration: InputDecoration(
-                                  hintText: "Search your favourite book",
-                                  hintStyle: TextStyle(
-                                      color: Colors.black26,
-                                      fontFamily: GoogleFonts.ibarraRealNova()
-                                          .fontFamily,
-                                      fontSize: 14),
-                                  prefixIcon: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Icon(Icons.search),
-                                  ),
-                                  border: InputBorder.none),
-                              onChanged: (string) => (subject.add(string)),
+      return Scaffold(
+        backgroundColor: AppColors.backWhiteColor
+        ,
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: Dimensions.height100,
+              ),
+              ConstrainedBox(
+                  constraints: BoxConstraints(
+                      maxHeight: Dimensions.heigh80, maxWidth: Dimensions.width100, minHeight: Dimensions.height50, minWidth: Dimensions.width100),
+                  child: Image.asset(
+                    "assets/stamp.png",
+                    height: Dimensions.height65_01,
+                    width: Dimensions.width65_01,
+                  )),
+              SizedBox(height: Dimensions.height10,),
+              Expanded(
+                child: CustomScrollView(
+                  slivers: <Widget>[
+                    SliverList(
+                        delegate: SliverChildListDelegate(
+                      [
+                        wrapInAnimation(
+                            Padding(
+                              padding:  EdgeInsets.symmetric(horizontal: Dimensions.height10, vertical: Dimensions.width10),
+                              child: Observer(builder: (context) {
+                                return Text(
+                                  "Hello, ${userStore.user?.displayName ?? ''}",
+                                  style: textStyle.copyWith(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: Dimensions.height26,
+                                      // fontFamily: 'Segoe UI',
+                                  ));
+                              }),
                             ),
-                          )),
-                    ),
-                    SizedBox(height: 16.0),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: Text(
-                        bookStore.currentCategory?.title == null
-                            ? "Popular Genre"
-                            : bookStore.currentCategory!.title!,
-                        style: textStyle.copyWith(
-                            fontFamily:
-                                GoogleFonts.ibarraRealNova().fontFamily),
-                      ),
-                    ),
-                    SizedBox(height: 8.0),
-                    getGridForCategories(),
-                    _buildExpandable(),
-                    items.isNotEmpty
-                        ? GridView.extent(
-                            padding: EdgeInsets.zero,
-                            maxCrossAxisExtent: 150,
-                            shrinkWrap: true,
-                            physics: ScrollPhysics(),
-                            children: items
-                                .map((Book book) => Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 8.0,
-                                          bottom: 16.0,
-                                          left: 24.0,
-                                          right: 24.0),
-                                      child: Stamp(
-                                        book.url!,
-                                        width: 105.0,
-                                        onClick: () {
-                                          Navigator.of(context).push(FadeRoute(
-                                            builder: (BuildContext context) =>
-                                                Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child:
-                                                  BookDetailsPageFormal(book),
-                                            ),
-                                            settings: RouteSettings(
-                                                name: '/book_detais_formal'),
-                                          ));
-                                        },
+                            0),
+                        SizedBox(height: Dimensions.height5),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: Dimensions.width6),
+                          child: Card(
+                            shadowColor: Colors.grey[200] ,
+                              color: AppColors.searchBarColor,
+                              elevation: Dimensions.height12,
+                              child: Padding(
+                                padding: EdgeInsets.all(0),
+                                child: TextField(
+                                  decoration: InputDecoration(
+                                      hintText: "Search your favourite book",
+                                      hintStyle: TextStyle(
+                                          color: AppColors.mainBlackColor,
+
+                                          fontSize: Dimensions.height14,
+                                          fontWeight: FontWeight.w400
                                       ),
-                                    ))
-                                .toList(),
-                          )
-                        : SizedBox.shrink(),
-                    items.isEmpty && isLoading == false
-                        ? Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                                wrapInAnimation(
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 10.0),
-                                      child: Text(
-                                        "Top books",
-                                        style: textStyle.copyWith(
-                                            fontFamily:
-                                                GoogleFonts.ibarraRealNova()
-                                                    .fontFamily),
+                                      prefixIcon: Padding(
+                                        padding: EdgeInsets.symmetric(horizontal: Dimensions.width8, vertical: Dimensions.height8),
+                                        child: Icon(Icons.search, size: Dimensions.height16_4, color: AppColors.mainBlackColor,),
                                       ),
-                                    ),
-                                    0),
-                                wrapInAnimation(
-                                    collectionPreview(
-                                        Color(0xffffffff), "Biographies", [
-                                      "wO3PCgAAQBAJ",
-                                      "_LFSBgAAQBAJ",
-                                      "8U2oAAAAQBAJ",
-                                      "yG3PAK6ZOucC",
-                                    ]),
-                                    1),
-                                wrapInAnimation(
-                                    collectionPreview(
-                                        Color(0xffffffff), "Fiction", [
-                                      "OsUPDgAAQBAJ",
-                                      "3e-dDAAAQBAJ",
-                                      "-ITZDAAAQBAJ",
-                                      "rmBeDAAAQBAJ",
-                                      "vgzJCwAAQBAJ",
-                                    ]),
-                                    2),
-                                wrapInAnimation(
-                                    collectionPreview(Color(0xffffffff),
-                                        "Mystery & Thriller", [
-                                      "1Y9gDQAAQBAJ",
-                                      "Pz4YDQAAQBAJ",
-                                      "UXARDgAAQBAJ"
-                                    ]),
-                                    3),
-                                wrapInAnimation(
-                                    collectionPreview(
-                                        Color(0xffffffff), "Sience Ficition", [
-                                      "JMYUDAAAQBAJ",
-                                      "PzhQydl-QD8C",
-                                      "nkalO3OsoeMC",
-                                      "VO8nDwAAQBAJ",
-                                      "Nxl0BQAAQBAJ"
-                                    ]),
-                                    4),
-                              ])
-                        : isLoading == true
-                            ? Column(
-                                children: [
-                                  SizedBox(height: 100),
-                                  Center(
-                                    child: CircularProgressIndicator(),
-                                  )
-                                ],
+                                      border: InputBorder.none),
+                                  onChanged: (string) => (subject.add(string)),
+                                ),
+                              )),
+                        ),
+                        SizedBox(height: Dimensions.height16),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: Dimensions.height10),
+                          child: Text(
+                            bookStore.currentCategory?.title == null
+                                ? "Popular Genre"
+                                : bookStore.currentCategory!.title!,
+                            style: textStyle.copyWith(
+
+                            fontSize: Dimensions.height20,
+                            fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                        SizedBox(height: Dimensions.height8),
+                        getGridForCategories(),
+                        _buildExpandable(),
+                        items.isNotEmpty
+                            ? GridView.extent(
+                                padding: EdgeInsets.zero,
+                                maxCrossAxisExtent: 150,
+                                shrinkWrap: true,
+                                physics: ScrollPhysics(),
+                                children: items
+                                    .map((Book book) => Padding(
+                                          padding:  EdgeInsets.only(
+                                              top: Dimensions.height8,
+                                              bottom: Dimensions.height16,
+                                              left: Dimensions.width24,
+                                              right: Dimensions.width24),
+                                          child: Stamp(
+                                            book.url!,
+                                            width: Dimensions.width105,
+                                            onClick: () {
+                                              Navigator.of(context).push(FadeRoute(
+                                                builder: (BuildContext context) =>
+                                                    Padding(
+                                                  padding:
+                                                       EdgeInsets.symmetric(horizontal: Dimensions.width8,vertical: Dimensions.height8),
+                                                  child:
+                                                      BookDetailsPageFormal(book),
+                                                ),
+                                                settings: RouteSettings(
+                                                    name: '/book_detais_formal'),
+                                              ));
+                                            },
+                                          ),
+                                        ))
+                                    .toList(),
                               )
                             : SizedBox.shrink(),
+                        items.isEmpty && isLoading == false
+                            ? Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                    wrapInAnimation(
+                                        Padding(
+                                          padding:  EdgeInsets.only(
+                                              left: Dimensions.width10, right: Dimensions.width10, top: Dimensions.height30),
+                                          child: Text(
+                                            "Top books",
+                                            style: textStyle.copyWith(
+
+                                               fontSize: Dimensions.height20,
+                                              fontWeight: FontWeight.w400
+                                            ),
+                                          ),
+                                        ),
+                                        0),
+                                    wrapInAnimation(
+                                        collectionPreview(
+                                            Color(0xffffffff), "Biographies", [
+                                          "wO3PCgAAQBAJ",
+                                          "_LFSBgAAQBAJ",
+                                          "8U2oAAAAQBAJ",
+                                          "yG3PAK6ZOucC",
+                                        ]),
+                                        1),
+                                    wrapInAnimation(
+                                        collectionPreview(
+                                            Color(0xffffffff), "Fiction", [
+                                          "OsUPDgAAQBAJ",
+                                          "3e-dDAAAQBAJ",
+                                          "-ITZDAAAQBAJ",
+                                          "rmBeDAAAQBAJ",
+                                          "vgzJCwAAQBAJ",
+                                        ]),
+                                        2),
+                                    wrapInAnimation(
+                                        collectionPreview(Color(0xffffffff),
+                                            "Mystery & Thriller", [
+                                          "1Y9gDQAAQBAJ",
+                                          "Pz4YDQAAQBAJ",
+                                          "UXARDgAAQBAJ"
+                                        ]),
+                                        3),
+                                    wrapInAnimation(
+                                        collectionPreview(
+                                            Color(0xffffffff), "Sience Ficition", [
+                                          "JMYUDAAAQBAJ",
+                                          "PzhQydl-QD8C",
+                                          "nkalO3OsoeMC",
+                                          "VO8nDwAAQBAJ",
+                                          "Nxl0BQAAQBAJ"
+                                        ]),
+                                        4),
+                                  ])
+                            : isLoading == true
+                                ? Column(
+                                    children: [
+                                      SizedBox(height: Dimensions.height100),
+                                      Center(
+                                        child: CircularProgressIndicator(),
+                                      )
+                                    ],
+                                  )
+                                : SizedBox.shrink(),
+                      ],
+                    ))
                   ],
-                ))
-              ],
-            ),
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       );
     });
   }
@@ -257,7 +271,7 @@ class _BookScreenStateNew extends AbstractSearchBookState<BookScreen> {
 
   Widget getGridForCategories() {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding:  EdgeInsets.symmetric(horizontal: Dimensions.width8, vertical: Dimensions.height8),
       child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
@@ -280,7 +294,7 @@ class _BookScreenStateNew extends AbstractSearchBookState<BookScreen> {
 
   Widget getExpandedCategories(List<Category> categories) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding:  EdgeInsets.symmetric(horizontal: Dimensions.width8, vertical: Dimensions.height8),
       child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
@@ -309,16 +323,18 @@ class _BookScreenStateNew extends AbstractSearchBookState<BookScreen> {
           children: [
             getExpandedCategories(bookStore.allCategories.sublist(0, 2)),
             Padding(
-              padding: const EdgeInsets.only(right: 24.0, top: 8),
+              padding:  EdgeInsets.only(right: Dimensions.width24, top: Dimensions.height8),
               child: Align(
                 alignment: Alignment.centerRight,
                 child: ExpandableButton(
                   child: Text(
-                    "See all >",
+                    "see all >",
                     textAlign: TextAlign.end,
                     style: TextStyle(
-                      fontFamily: GoogleFonts.ibarraRealNova().fontFamily,
-                      color: Colors.blue,
+                      fontSize: Dimensions.height18,
+                      fontWeight: FontWeight.w400,
+                      //fontFamily: GoogleFonts.ibarraRealNova().fontFamily,
+                      color: AppColors.lightBlueColor,
                     ),
                   ),
                 ),
@@ -334,7 +350,7 @@ class _BookScreenStateNew extends AbstractSearchBookState<BookScreen> {
               getExpandedCategories(bookStore.allCategories.sublist(3, 6)),
               getExpandedCategories(bookStore.allCategories.sublist(6, 9)),
               Padding(
-                padding: const EdgeInsets.only(right: 16.0),
+                padding:  EdgeInsets.only(right: Dimensions.width16),
                 child: Align(
                     alignment: Alignment.bottomRight,
                     child: ExpandableButton(

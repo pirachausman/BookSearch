@@ -48,6 +48,7 @@ class _CollectionPreviewState extends State<CollectionPreview> {
                   //        Divider(color: Colors.black,),
                   // Text(widget.title, style: textStyle,),
                   Stack(
+
                     children: <Widget>[
                       SizedBox(
                         height: 200.0,
@@ -60,7 +61,7 @@ class _CollectionPreviewState extends State<CollectionPreview> {
                                       child: Stamp(
                                         book.url!,
                                         width: 100.0,
-                                        locked: !book.starred!,
+                                        // locked: !book.starred!,
                                         onClick: () {
                                           Navigator.of(context).push(FadeRoute(
                                             builder: (BuildContext context) =>
@@ -74,9 +75,11 @@ class _CollectionPreviewState extends State<CollectionPreview> {
                                 .toList()),
                       ),
                       widget.loading
-                          ? Center(
-                              child: CircularProgressIndicator(),
-                            )
+                          ? Container(
+                            child: Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                          )
                           : Container(),
                     ],
                   ),
