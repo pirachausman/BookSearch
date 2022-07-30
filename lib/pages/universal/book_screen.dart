@@ -74,7 +74,7 @@ class _BookScreenStateNew extends AbstractSearchBookState<BookScreen> {
                               padding:  EdgeInsets.symmetric(horizontal: Dimensions.height10, vertical: Dimensions.width10),
                               child: Observer(builder: (context) {
                                 return Text(
-                                  "Hello, ${userStore.user?.displayName ?? ''}",
+                                  "${userStore.user?.displayName ?? ''}",
                                   style: textStyle.copyWith(
                                       fontWeight: FontWeight.w700,
                                       fontSize: Dimensions.height26,
