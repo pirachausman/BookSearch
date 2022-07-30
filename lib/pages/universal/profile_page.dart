@@ -26,7 +26,7 @@ class _ProfilePageState extends ProfilePageAbstractState {
     return Scaffold(
       backgroundColor: AppColors.backWhiteColor,
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
+        padding: EdgeInsets.symmetric(horizontal: Dimensions.width20),
         child: Stack(
           children: [
             Column(
