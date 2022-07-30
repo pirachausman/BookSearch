@@ -52,7 +52,7 @@ class _BookScreenStateNew extends AbstractSearchBookState<BookScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               SizedBox(
-                height: Dimensions.height100,
+                height: Dimensions.height50,
               ),
               ConstrainedBox(
                   constraints: BoxConstraints(
