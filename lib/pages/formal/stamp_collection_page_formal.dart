@@ -29,8 +29,8 @@ class _StampCollectionPageFormalState
     body = GridView.extent(
       padding: EdgeInsets.zero,
       maxCrossAxisExtent:  Dimensions.height150,
-      crossAxisSpacing:Dimensions.height5 ,
-      mainAxisSpacing: Dimensions.width5,
+      // crossAxisSpacing:Dimensions.height5 ,
+      mainAxisSpacing: Dimensions.width30,
       shrinkWrap: true,
       physics: ScrollPhysics(),
       children: items

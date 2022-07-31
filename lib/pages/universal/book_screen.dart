@@ -52,11 +52,11 @@ class _BookScreenStateNew extends AbstractSearchBookState<BookScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               SizedBox(
-                height: Dimensions.height50,
+                height: Dimensions.height70,
               ),
               ConstrainedBox(
                   constraints: BoxConstraints(
-                      maxHeight: Dimensions.heigh80, maxWidth: Dimensions.width100, minHeight: Dimensions.height50, minWidth: Dimensions.width100),
+                      maxHeight: Dimensions.heigh80, maxWidth: Dimensions.width85, minHeight: Dimensions.height50, minWidth: Dimensions.width85),
                   child: Image.asset(
                     "assets/stamp.png",
                     height: Dimensions.height65_01,
@@ -74,7 +74,7 @@ class _BookScreenStateNew extends AbstractSearchBookState<BookScreen> {
                               padding:  EdgeInsets.symmetric(horizontal: Dimensions.height10, vertical: Dimensions.width10),
                               child: Observer(builder: (context) {
                                 return Text(
-                                  "${userStore.user?.displayName ?? ''}",
+                                  "${userStore.user?.displayName!.split(' ')[0] ?? ''}",
                                   style: textStyle.copyWith(
                                       fontWeight: FontWeight.w700,
                                       fontSize: Dimensions.height26,
@@ -114,9 +114,7 @@ class _BookScreenStateNew extends AbstractSearchBookState<BookScreen> {
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: Dimensions.height10),
                           child: Text(
-                            bookStore.currentCategory?.title == null
-                                ? "Popular Genre"
-                                : bookStore.currentCategory!.title!,
+                              "Popular Genre",
                             style: textStyle.copyWith(
 
                             fontSize: Dimensions.height20,
@@ -124,41 +122,56 @@ class _BookScreenStateNew extends AbstractSearchBookState<BookScreen> {
                           ),
                         ),
                         SizedBox(height: Dimensions.height8),
-                        getGridForCategories(),
+                        // getGridForCategories(),
                         _buildExpandable(),
+                        SizedBox(height: Dimensions.height20,),
+
                         items.isNotEmpty
-                            ? GridView.extent(
-                                padding: EdgeInsets.zero,
-                                maxCrossAxisExtent: 150,
-                                shrinkWrap: true,
-                                physics: ScrollPhysics(),
-                                children: items
-                                    .map((Book book) => Padding(
-                                          padding:  EdgeInsets.only(
-                                              top: Dimensions.height8,
-                                              bottom: Dimensions.height16,
-                                              left: Dimensions.width24,
-                                              right: Dimensions.width24),
-                                          child: Stamp(
-                                            book.url!,
-                                            width: Dimensions.width105,
-                                            onClick: () {
-                                              Navigator.of(context).push(FadeRoute(
-                                                builder: (BuildContext context) =>
-                                                    Padding(
-                                                  padding:
-                                                       EdgeInsets.symmetric(horizontal: Dimensions.width8,vertical: Dimensions.height8),
-                                                  child:
-                                                      BookDetailsPageFormal(book),
-                                                ),
-                                                settings: RouteSettings(
-                                                    name: '/book_detais_formal'),
-                                              ));
-                                            },
-                                          ),
+                            ? Column(
+                              children: [
+                                Padding(
+                                  padding:  EdgeInsets.only(
+                                      left: Dimensions.width10, right: Dimensions.width10, top: Dimensions.height20, bottom:Dimensions.height20 ),
+                                  child: Container(
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      "${bookStore.currentCategory?.title ?? 'Top books' }",
+                                      style: textStyle.copyWith(
+
+                                          fontSize: Dimensions.height20,
+                                          fontWeight: FontWeight.w400
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                GridView.extent(
+                                    padding: EdgeInsets.zero,
+                                    maxCrossAxisExtent: Dimensions.height150,
+                                    mainAxisSpacing: Dimensions.width30,
+                                    shrinkWrap: true,
+                                    physics: BouncingScrollPhysics(),
+                                    children: items
+                                        .map((Book book) => Stamp(
+                                          book.url!,
+                                          width:  Dimensions.width90,
+                                          onClick: () {
+                                            Navigator.of(context).push(FadeRoute(
+                                              builder: (BuildContext context) =>
+                                                  Padding(
+                                                padding:
+                                                     EdgeInsets.symmetric(horizontal: Dimensions.width8,vertical: Dimensions.height8),
+                                                child:
+                                                    BookDetailsPageFormal(book),
+                                              ),
+                                              settings: RouteSettings(
+                                                  name: '/book_detais_formal'),
+                                            ));
+                                          },
                                         ))
-                                    .toList(),
-                              )
+                                        .toList(),
+                                  ),
+                              ],
+                            )
                             : SizedBox.shrink(),
                         items.isEmpty && isLoading == false
                             ? Column(
@@ -168,9 +181,9 @@ class _BookScreenStateNew extends AbstractSearchBookState<BookScreen> {
                                     wrapInAnimation(
                                         Padding(
                                           padding:  EdgeInsets.only(
-                                              left: Dimensions.width10, right: Dimensions.width10, top: Dimensions.height30),
+                                              left: Dimensions.width10, right: Dimensions.width10, top: Dimensions.height20, bottom:Dimensions.height20 ),
                                           child: Text(
-                                            "Top books",
+                                            "Top books ",
                                             style: textStyle.copyWith(
 
                                                fontSize: Dimensions.height20,
@@ -186,36 +199,21 @@ class _BookScreenStateNew extends AbstractSearchBookState<BookScreen> {
                                           "_LFSBgAAQBAJ",
                                           "8U2oAAAAQBAJ",
                                           "yG3PAK6ZOucC",
-                                        ]),
-                                        1),
-                                    wrapInAnimation(
-                                        collectionPreview(
-                                            Color(0xffffffff), "Fiction", [
                                           "OsUPDgAAQBAJ",
                                           "3e-dDAAAQBAJ",
                                           "-ITZDAAAQBAJ",
                                           "rmBeDAAAQBAJ",
                                           "vgzJCwAAQBAJ",
-                                        ]),
-                                        2),
-                                    wrapInAnimation(
-                                        collectionPreview(Color(0xffffffff),
-                                            "Mystery & Thriller", [
                                           "1Y9gDQAAQBAJ",
                                           "Pz4YDQAAQBAJ",
-                                          "UXARDgAAQBAJ"
-                                        ]),
-                                        3),
-                                    wrapInAnimation(
-                                        collectionPreview(
-                                            Color(0xffffffff), "Sience Ficition", [
+                                          "UXARDgAAQBAJ",
                                           "JMYUDAAAQBAJ",
                                           "PzhQydl-QD8C",
                                           "nkalO3OsoeMC",
                                           "VO8nDwAAQBAJ",
                                           "Nxl0BQAAQBAJ"
                                         ]),
-                                        4),
+                                        1),
                                   ])
                             : isLoading == true
                                 ? Column(
@@ -272,56 +270,47 @@ class _BookScreenStateNew extends AbstractSearchBookState<BookScreen> {
   Widget getGridForCategories() {
     return Padding(
       padding:  EdgeInsets.symmetric(horizontal: Dimensions.width8, vertical: Dimensions.height8),
-      child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: bookStore.category.map((e) {
-                return Observer(builder: (context) {
-                  bookStore.category;
-                  return ChipsWidget(e, () {
-                    bookStore.updateCurrentCategory(e);
-                    subject.add(e.title!);
-                  },
-                      bookStore.currentCategory == e
-                          ? Color(0xff31A7FB)
-                          : Colors.white);
-                });
-              }).toList())),
+      child: Wrap(
+          children: bookStore.category.map((e) {
+            return Observer(builder: (context) {
+              bookStore.category;
+              return ChipsWidget(e, () {
+                bookStore.updateCurrentCategory(e);
+                subject.add(e.title!);
+              },
+                  bookStore.currentCategory == e
+                      ? Color(0xff31A7FB)
+                      : Colors.white);
+            });
+          }).toList()),
     );
   }
 
   Widget getExpandedCategories(List<Category> categories) {
-    return Padding(
-      padding:  EdgeInsets.symmetric(horizontal: Dimensions.width8, vertical: Dimensions.height8),
-      child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: categories.map((e) {
-                return Observer(builder: (context) {
-                  bookStore.allCategories;
-                  return ChipsWidget(e, () {
-                    bookStore.updateCurrentCategory(e);
-                    subject.add(e.title!);
-                  },
-                      bookStore.currentCategory == e
-                          ? Color(0xff31A7FB)
-                          : Colors.white);
-                });
-              }).toList())),
-    );
+    return Wrap(
+      runSpacing: 10,
+        // spacing: 5,
+        children: categories.map((e) {
+          return Observer(builder: (context) {
+            bookStore.allCategories;
+            return ChipsWidget(e, () {
+              bookStore.updateCurrentCategory(e);
+              subject.add(e.title!);
+            },
+                bookStore.currentCategory == e
+                    ? Color(0xff31A7FB)
+                    : Colors.white);
+          });
+        }).toList());
   }
 
   _buildExpandable() {
     return ExpandableNotifier(
       child: Expandable(
-        collapsed: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+        collapsed: Wrap(
+          // mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            getExpandedCategories(bookStore.allCategories.sublist(0, 2)),
+            getExpandedCategories(bookStore.allCategories.sublist(0, 5)),
             Padding(
               padding:  EdgeInsets.only(right: Dimensions.width24, top: Dimensions.height8),
               child: Align(
@@ -343,12 +332,12 @@ class _BookScreenStateNew extends AbstractSearchBookState<BookScreen> {
           ],
         ),
         expanded: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              getExpandedCategories(bookStore.allCategories.sublist(0, 3)),
-              getExpandedCategories(bookStore.allCategories.sublist(3, 6)),
-              getExpandedCategories(bookStore.allCategories.sublist(6, 9)),
+              getExpandedCategories(bookStore.allCategories),
+              // getExpandedCategories(bookStore.allCategories.sublist(5, )),
+              // getExpandedCategories(bookStore.allCategories.sublist(6, 9)),
               Padding(
                 padding:  EdgeInsets.only(right: Dimensions.width16),
                 child: Align(

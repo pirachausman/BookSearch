@@ -10,8 +10,10 @@ import 'package:test_app/utils/utils.dart';
 import 'package:test_app/widgets/book_card_compact.dart';
 import 'package:test_app/widgets/chips_widget.dart';
 
+import '../../model/Book.dart';
 import '../../utils/colors.dart';
 import '../../utils/dimensions.dart';
+import '../../widgets/stamp.dart';
 
 class SearchBookPageNew extends StatefulWidget {
   @override
@@ -28,106 +30,148 @@ class _SearchBookStateNew extends AbstractSearchBookState<SearchBookPageNew> {
     return Observer(builder: (context) {
       bookStore.category;
       return Scaffold(
-        key: scaffoldKey,
-        backgroundColor: AppColors.backWhiteColor,
-        body: Column(
-          children: [
-            SizedBox(
-              height: Dimensions.height60,
-            ),
-            Expanded(
-              child: CustomScrollView(
-                slivers: <Widget>[
-                  SliverPadding(
-                    padding:  EdgeInsets.symmetric(horizontal: Dimensions.width16, vertical: Dimensions.height16),
-                    sliver: SliverToBoxAdapter(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          SizedBox(
-                            height: Dimensions.height8,
-                          ),
-                          Text(
-                            "Explore",
-                            style: textStyle.copyWith(
-                                // fontFamily:
-                                //     GoogleFonts.ibarraRealNova().fontFamily,
-                                fontSize: Dimensions.height26,
-                              fontWeight: FontWeight.w700
-                            ),
-                          ),
-                          SizedBox(height: Dimensions.height16),
-                          Card(
-                              color: AppColors.searchBarColor,
-                              elevation: Dimensions.height16,
-                              child: Padding(
-                                padding:  EdgeInsets.all(0),
-                                child: TextField(
-                                  decoration: InputDecoration(
-                                      hintText: "Search your favourite book",
-                                      hintStyle: TextStyle(
-                                          color: AppColors.mainBlackColor,
-                                          // fontFamily: GoogleFonts.ibarraRealNova()
-                                          //     .fontFamily,
-                                          fontSize: Dimensions.height14,
-                                          fontWeight: FontWeight.w400
-                                      ),
-                                      prefixIcon: Padding(
-                                        padding:  EdgeInsets.symmetric(horizontal: Dimensions.width8, vertical: Dimensions.height8),
-                                        child: Icon(Icons.search, size: Dimensions.height16_4, color: AppColors.mainBlackColor,),
-                                      ),
-                                      border: InputBorder.none),
-                                  onChanged: (string) => (subject.add(string)),
+        backgroundColor: AppColors.backWhiteColor
+        ,
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: Dimensions.height70,
+              ),
+              Expanded(
+                child: CustomScrollView(
+                  slivers: <Widget>[
+                    SliverList(
+                        delegate: SliverChildListDelegate(
+                          [
+                                Padding(
+                                  padding:  EdgeInsets.symmetric(horizontal: Dimensions.height10, vertical: Dimensions.width10),
+                                  child: Observer(builder: (context) {
+                                    return Text(
+                                        "Explore",
+                                        style: textStyle.copyWith(
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: Dimensions.height26,
+                                          // fontFamily: 'Segoe UI',
+                                        ));
+                                  }),
                                 ),
-                              )),
-                          SizedBox(
-                            height: Dimensions.height16,
-                          ),
-                          Padding(
-                            padding:
-                                 EdgeInsets.symmetric(horizontal: Dimensions.height6),
-                            child: Text(
-                              bookStore.currentCategory?.title == null
-                                  ? "Popular Genre"
-                                  : bookStore.currentCategory!.title!,
-                              style: textStyle.copyWith(
-                                // fontFamily:
-                                //     GoogleFonts.ibarraRealNova().fontFamily,
-                                fontSize: Dimensions.height20,
-                                fontWeight: FontWeight.w400
+
+                            SizedBox(height: Dimensions.height5),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: Dimensions.width6),
+                              child: Card(
+                                  shadowColor: Colors.grey[200] ,
+                                  color: AppColors.searchBarColor,
+                                  elevation: Dimensions.height12,
+                                  child: Padding(
+                                    padding: EdgeInsets.all(0),
+                                    child: TextField(
+                                      decoration: InputDecoration(
+                                          hintText: "Search your favourite book",
+                                          hintStyle: TextStyle(
+                                              color: AppColors.mainBlackColor,
+
+                                              fontSize: Dimensions.height14,
+                                              fontWeight: FontWeight.w400
+                                          ),
+                                          prefixIcon: Padding(
+                                            padding: EdgeInsets.symmetric(horizontal: Dimensions.width8, vertical: Dimensions.height8),
+                                            child: Icon(Icons.search, size: Dimensions.height16_4, color: AppColors.mainBlackColor,),
+                                          ),
+                                          border: InputBorder.none),
+                                      onChanged: (string) => (subject.add(string)),
+                                    ),
+                                  )),
+                            ),
+                            SizedBox(height: Dimensions.height16),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: Dimensions.height10),
+                              child: Text(
+                                "Popular Genre",
+                                // bookStore.currentCategory?.title == null
+                                //     ? "Popular Genre"
+                                //     : bookStore.currentCategory!.title!,
+                                style: textStyle.copyWith(
+
+                                    fontSize: Dimensions.height20,
+                                    fontWeight: FontWeight.w400),
                               ),
                             ),
-                          ),
-                          SizedBox(height: Dimensions.height8),
-                          getGridForCategories(),
-                          _buildExpandable(),
-                        ],
-                      ),
-                    ),
-                  ),
-                  isLoading
-                      ? SliverToBoxAdapter(
-                          child: Center(child: CircularProgressIndicator()),
-                        )
-                      : SliverToBoxAdapter(),
-                  SliverList(
-                      delegate: SliverChildBuilderDelegate(
-                          (BuildContext context, int index) {
-                    return BookCardCompact(
-                      items[index],
-                      onClick: () {
-                        Navigator.of(context).push(FadeRoute(
-                          builder: (BuildContext context) =>
-                              BookDetailsPageFormal(items[index]),
-                          settings: RouteSettings(name: '/book_detais_formal'),
-                        ));
-                      },
-                    );
-                  }, childCount: items.length))
-                ],
+                            SizedBox(height: Dimensions.height8),
+                            // getGridForCategories(),
+                            _buildExpandable(),
+                            SizedBox(height: Dimensions.height20,),
+
+                            items.isNotEmpty
+                                ? Column(
+                              children: [
+                                Padding(
+                                  padding:  EdgeInsets.only(
+                                      left: Dimensions.width10, right: Dimensions.width10, top: Dimensions.height20, bottom:Dimensions.height20 ),
+                                  child: Container(
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      "${bookStore.currentCategory?.title ?? 'Top books' }",
+                                      style: textStyle.copyWith(
+
+                                          fontSize: Dimensions.height20,
+                                          fontWeight: FontWeight.w400
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                GridView.extent(
+                                  padding: EdgeInsets.zero,
+                                  maxCrossAxisExtent: Dimensions.height150,
+                                  mainAxisSpacing: Dimensions.width30,
+                                  shrinkWrap: true,
+                                  physics: BouncingScrollPhysics(),
+                                  children: items
+                                      .map((Book book) => Stamp(
+                                    book.url!,
+                                    width:  Dimensions.width90,
+                                    onClick: () {
+                                      Navigator.of(context).push(FadeRoute(
+                                        builder: (BuildContext context) =>
+                                            Padding(
+                                              padding:
+                                              EdgeInsets.symmetric(horizontal: Dimensions.width8,vertical: Dimensions.height8),
+                                              child:
+                                              BookDetailsPageFormal(book),
+                                            ),
+                                        settings: RouteSettings(
+                                            name: '/book_detais_formal'),
+                                      ));
+                                    },
+                                  ))
+                                      .toList(),
+                                ),
+                              ],
+                            )
+                                : SizedBox.shrink(),
+                            items.isEmpty && isLoading == false
+                                ? Container()
+                                : isLoading == true
+                                ? Column(
+                              children: [
+                                SizedBox(height: Dimensions.height100),
+                                Center(
+                                  child: CircularProgressIndicator(),
+                                )
+                              ],
+                            )
+                                : SizedBox.shrink(),
+                          ],
+                        ))
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       );
     });
@@ -154,55 +198,64 @@ class _SearchBookStateNew extends AbstractSearchBookState<SearchBookPageNew> {
   }
 
   Widget getExpandedCategories(List<Category> categories) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: Dimensions.width6, vertical: Dimensions.height6),
-      child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-              children: categories.map((e) {
-            return Observer(builder: (context) {
-              bookStore.allCategories;
-              return ChipsWidget(e, () {
-                bookStore.updateCurrentCategory(e);
-                subject.add(e.title!);
-              },
-                  bookStore.currentCategory == e
-                      ? Color(0xff31A7FB)
-                      : Colors.white);
-            });
-          }).toList())),
-    );
+    return Wrap(
+        runSpacing: 10,
+        // spacing: 5,
+        children: categories.map((e) {
+          return Observer(builder: (context) {
+            bookStore.allCategories;
+            return ChipsWidget(e, () {
+              bookStore.updateCurrentCategory(e);
+              subject.add(e.title!);
+            },
+                bookStore.currentCategory == e
+                    ? Color(0xff31A7FB)
+                    : Colors.white);
+          });
+        }).toList());
   }
-
   _buildExpandable() {
     return ExpandableNotifier(
       child: Expandable(
-        collapsed: Padding(
-          padding:  EdgeInsets.only(right: Dimensions.width24, top: Dimensions.height8),
-          child: Align(
-            alignment: Alignment.centerRight,
-            child: ExpandableButton(
-              child: Icon(
-                Icons.keyboard_arrow_down,
+        collapsed: Wrap(
+          // mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            getExpandedCategories(bookStore.allCategories.sublist(0, 5)),
+            Padding(
+              padding:  EdgeInsets.only(right: Dimensions.width24, top: Dimensions.height8),
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: ExpandableButton(
+                  child: Text(
+                    "see all >",
+                    textAlign: TextAlign.end,
+                    style: TextStyle(
+                      fontSize: Dimensions.height18,
+                      fontWeight: FontWeight.w400,
+                      //fontFamily: GoogleFonts.ibarraRealNova().fontFamily,
+                      color: AppColors.lightBlueColor,
+                    ),
+                  ),
+                ),
               ),
             ),
-          ),
+          ],
         ),
         expanded: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              getExpandedCategories(bookStore.allCategories.sublist(0, 3)),
-              getExpandedCategories(bookStore.allCategories.sublist(3, 6)),
-              getExpandedCategories(bookStore.allCategories.sublist(6, 9)),
+              getExpandedCategories(bookStore.allCategories),
+              // getExpandedCategories(bookStore.allCategories.sublist(5, )),
+              // getExpandedCategories(bookStore.allCategories.sublist(6, 9)),
               Padding(
-                padding:  EdgeInsets.only(right: Dimensions.width16, top: Dimensions.height8),
+                padding:  EdgeInsets.only(right: Dimensions.width16),
                 child: Align(
                     alignment: Alignment.bottomRight,
                     child: ExpandableButton(
                         child: Icon(
-                      Icons.keyboard_arrow_up,
-                    ))),
+                          Icons.keyboard_arrow_up,
+                        ))),
               )
             ]),
       ),

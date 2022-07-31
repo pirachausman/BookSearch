@@ -4,7 +4,7 @@ import 'package:test_app/utils/dimensions.dart';
 
 class Stamp extends StatefulWidget {
   Stamp(this.imageUrl,
-      {this.width = 111, this.locked = false, required this.onClick});
+      {this.width = 150, this.locked = false, required this.onClick});
 
   final bool withStartAnimation = false;
   final String imageUrl;

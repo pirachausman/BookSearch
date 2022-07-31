@@ -46,6 +46,10 @@ abstract class _BookStore with Store {
 
   @observable
   List<Category> allCategory = [
+
+    Category(title: "Fiction"),
+    Category(title: "Historical Fiction"),
+    Category(title: "Thriller"),
     Category(title: "Detective"),
     Category(title: "Fantasy"),
     Category(title: "Horror"),

@@ -71,9 +71,9 @@ class Dimensions{
   static double height32 = pageHeight /25.187;
   static double height150 = pageHeight /5.37;
   static double height98 = pageHeight /8.22;
-
-
-
+  static double height0_7 = pageHeight /1151.4;
+  static double height1350 = pageHeight /0.597;
+  static double height1400 = pageHeight /0.5757142857142857;
 
   static double width32= pageWidth /12.25;
   static double width150= pageWidth /2.61;
