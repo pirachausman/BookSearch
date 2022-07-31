@@ -54,9 +54,7 @@ class _StampCollectionPageFormalState
       color: AppColors.backWhiteColor,
     );
 
-    return Scaffold(
-      backgroundColor: AppColors.backWhiteColor,
-      body: Column(
+    return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -80,7 +78,6 @@ class _StampCollectionPageFormalState
             ]))
           ]))
         ],
-      ),
-    );
+      );
   }
 }

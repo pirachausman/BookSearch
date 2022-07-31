@@ -23,9 +23,7 @@ class _ProfilePageState extends ProfilePageAbstractState {
     const textStyle = const TextStyle(
         fontSize: 34.0, fontFamily: 'Segoe UI', fontWeight: FontWeight.w800);
 
-    return Scaffold(
-      backgroundColor: AppColors.backWhiteColor,
-      body: Padding(
+    return Padding(
         padding: EdgeInsets.symmetric(horizontal: Dimensions.width20),
         child: Stack(
           children: [
@@ -291,7 +289,6 @@ class _ProfilePageState extends ProfilePageAbstractState {
             )
           ],
         ),
-      ),
-    );
+      );
   }
 }

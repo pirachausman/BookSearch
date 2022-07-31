@@ -42,10 +42,7 @@ class _BookScreenStateNew extends AbstractSearchBookState<BookScreen> {
         fontSize: 22.0, fontFamily: 'Segoe UI', fontWeight: FontWeight.w800);
     return Observer(builder: (context) {
       bookStore.category;
-      return Scaffold(
-        backgroundColor: AppColors.backWhiteColor
-        ,
-        body: Padding(
+      return  Padding(
           padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -232,8 +229,7 @@ class _BookScreenStateNew extends AbstractSearchBookState<BookScreen> {
               ),
             ],
           ),
-        ),
-      );
+        );
     });
   }
 

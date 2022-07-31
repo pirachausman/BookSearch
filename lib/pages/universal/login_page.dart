@@ -57,11 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             topLeft: Radius.circular(Dimensions.radius25),
                             topRight: Radius.circular(Dimensions.radius25)),
               ),
-                // shape: RoundedRectangleBorder(
-                //     borderRadius: BorderRadius.only(
-                //         topLeft: Radius.circular(Dimensions.radius25),
-                //         topRight: Radius.circular(Dimensions.radius25))),
-                // color: Colors.white,
+
                 child: ConstrainedBox(
                   constraints: BoxConstraints(
                       minHeight: Dimensions.height230,

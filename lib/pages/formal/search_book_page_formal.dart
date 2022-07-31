@@ -29,10 +29,7 @@ class _SearchBookStateNew extends AbstractSearchBookState<SearchBookPageNew> {
         fontSize: 22.0, fontFamily: 'Segoe UI', fontWeight: FontWeight.bold);
     return Observer(builder: (context) {
       bookStore.category;
-      return Scaffold(
-        backgroundColor: AppColors.backWhiteColor
-        ,
-        body: Padding(
+      return Padding(
           padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -172,9 +169,9 @@ class _SearchBookStateNew extends AbstractSearchBookState<SearchBookPageNew> {
               ),
             ],
           ),
-        ),
-      );
-    });
+        );
+    }
+    );
   }
 
   Widget getGridForCategories() {
