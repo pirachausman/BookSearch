@@ -5,8 +5,6 @@ import 'package:test_app/mobx/user_store.dart';
 import 'package:test_app/pages/navigation.dart';
 import 'package:test_app/utils/colors.dart';
 
-import '../../utils/dimensions.dart';
-
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 

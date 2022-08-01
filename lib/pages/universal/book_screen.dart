@@ -18,7 +18,7 @@ import 'package:test_app/widgets/collection_preview.dart';
 import 'package:test_app/widgets/stamp.dart';
 
 import '../../model/Book.dart';
-import '../../utils/dimensions.dart';
+// import '../../utils/dimensions.dart';
 
 class BookScreen extends StatefulWidget {
   BookScreen(this.interfaceType, this.cardFirstOpenController, {Key? key})
@@ -38,28 +38,54 @@ class _BookScreenStateNew extends AbstractSearchBookState<BookScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double pageWidth = MediaQuery.of(context).size.width;
+    double pageHeight = MediaQuery.of(context).size.height;
+    double height20 = pageHeight /40.3;
+    double height12 = pageHeight /67.16;
+    double width8 = pageWidth / 49;
+    double height8 = pageHeight /100.75;
+    double width10 = pageWidth / 39.2;
+    double heigh80 = pageHeight /10.075;
+    double width85 = pageWidth / 4.6;
+    double height50 = pageHeight /16.12;
+    double height65_01 = pageHeight /12.39;
+    double width65_01 = pageWidth /6.029841562836487;
+    double height10 = pageHeight /80.6;
+    double height26 = pageHeight /31;
+    double height5 = pageHeight /161.2;
+    double width6 = pageWidth / 65.33333333333333 ;
+    double height14 = pageHeight /57.57;
+    double height16_4 = pageHeight /49.14634146341463;
+    double height16 = pageHeight /50.375;
+    double height150 = pageHeight /5.37;
+    double width30 = pageWidth / 13;
+    double width90 = pageWidth / 4.1;
+    double height100 = pageHeight /8.06;
+    double height70 = pageHeight /11.51;
+
+
     const textStyle = const TextStyle(
         fontSize: 22.0, fontFamily: 'Segoe UI', fontWeight: FontWeight.w800);
     return Observer(builder: (context) {
       bookStore.category;
       return  Padding(
-          padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
+          padding: EdgeInsets.symmetric(horizontal: width10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               SizedBox(
-                height: Dimensions.height70,
+                height: height70,
               ),
               ConstrainedBox(
                   constraints: BoxConstraints(
-                      maxHeight: Dimensions.heigh80, maxWidth: Dimensions.width85, minHeight: Dimensions.height50, minWidth: Dimensions.width85),
+                      maxHeight: heigh80, maxWidth: width85, minHeight: height50, minWidth: width85),
                   child: Image.asset(
                     "assets/stamp.png",
-                    height: Dimensions.height65_01,
-                    width: Dimensions.width65_01,
+                    height: height65_01,
+                    width: width65_01,
                   )),
-              SizedBox(height: Dimensions.height10,),
+              SizedBox(height: height10,),
               Expanded(
                 child: CustomScrollView(
                   slivers: <Widget>[
@@ -68,25 +94,25 @@ class _BookScreenStateNew extends AbstractSearchBookState<BookScreen> {
                       [
                         wrapInAnimation(
                             Padding(
-                              padding:  EdgeInsets.symmetric(horizontal: Dimensions.height10, vertical: Dimensions.width10),
+                              padding:  EdgeInsets.symmetric(horizontal: height10, vertical: width10),
                               child: Observer(builder: (context) {
                                 return Text(
                                   "${userStore.user?.displayName!.split(' ')[0] ?? ''}",
                                   style: textStyle.copyWith(
                                       fontWeight: FontWeight.w700,
-                                      fontSize: Dimensions.height26,
+                                      fontSize: height26,
                                       // fontFamily: 'Segoe UI',
                                   ));
                               }),
                             ),
                             0),
-                        SizedBox(height: Dimensions.height5),
+                        SizedBox(height: height5),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: Dimensions.width6),
+                          padding: EdgeInsets.symmetric(horizontal: width6),
                           child: Card(
                             shadowColor: Colors.grey[200] ,
                               color: AppColors.searchBarColor,
-                              elevation: Dimensions.height12,
+                              elevation: height12,
                               child: Padding(
                                 padding: EdgeInsets.all(0),
                                 child: TextField(
@@ -95,47 +121,47 @@ class _BookScreenStateNew extends AbstractSearchBookState<BookScreen> {
                                       hintStyle: TextStyle(
                                           color: AppColors.mainBlackColor,
 
-                                          fontSize: Dimensions.height14,
+                                          fontSize: height14,
                                           fontWeight: FontWeight.w400
                                       ),
                                       prefixIcon: Padding(
-                                        padding: EdgeInsets.symmetric(horizontal: Dimensions.width8, vertical: Dimensions.height8),
-                                        child: Icon(Icons.search, size: Dimensions.height16_4, color: AppColors.mainBlackColor,),
+                                        padding: EdgeInsets.symmetric(horizontal: width8, vertical: height8),
+                                        child: Icon(Icons.search, size: height16_4, color: AppColors.mainBlackColor,),
                                       ),
                                       border: InputBorder.none),
                                   onChanged: (string) => (subject.add(string)),
                                 ),
                               )),
                         ),
-                        SizedBox(height: Dimensions.height16),
+                        SizedBox(height: height16),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: Dimensions.height10),
+                          padding: EdgeInsets.symmetric(horizontal: height10),
                           child: Text(
                               "Popular Genre",
                             style: textStyle.copyWith(
 
-                            fontSize: Dimensions.height20,
+                            fontSize: height20,
                             fontWeight: FontWeight.w400),
                           ),
                         ),
-                        SizedBox(height: Dimensions.height8),
+                        SizedBox(height: height8),
                         // getGridForCategories(),
                         _buildExpandable(),
-                        SizedBox(height: Dimensions.height20,),
+                        SizedBox(height: height20,),
 
                         items.isNotEmpty
                             ? Column(
                               children: [
                                 Padding(
                                   padding:  EdgeInsets.only(
-                                      left: Dimensions.width10, right: Dimensions.width10, top: Dimensions.height20, bottom:Dimensions.height20 ),
+                                      left: width10, right: width10, top: height20, bottom:height20 ),
                                   child: Container(
                                     alignment: Alignment.topLeft,
                                     child: Text(
                                       "${bookStore.currentCategory?.title ?? 'Top books' }",
                                       style: textStyle.copyWith(
 
-                                          fontSize: Dimensions.height20,
+                                          fontSize: height20,
                                           fontWeight: FontWeight.w400
                                       ),
                                     ),
@@ -143,20 +169,20 @@ class _BookScreenStateNew extends AbstractSearchBookState<BookScreen> {
                                 ),
                                 GridView.extent(
                                     padding: EdgeInsets.zero,
-                                    maxCrossAxisExtent: Dimensions.height150,
-                                    mainAxisSpacing: Dimensions.width30,
+                                    maxCrossAxisExtent: height150,
+                                    mainAxisSpacing: width30,
                                     shrinkWrap: true,
                                     physics: BouncingScrollPhysics(),
                                     children: items
                                         .map((Book book) => Stamp(
                                           book.url!,
-                                          width:  Dimensions.width90,
+                                          width:  width90,
                                           onClick: () {
                                             Navigator.of(context).push(FadeRoute(
                                               builder: (BuildContext context) =>
                                                   Padding(
                                                 padding:
-                                                     EdgeInsets.symmetric(horizontal: Dimensions.width8,vertical: Dimensions.height8),
+                                                     EdgeInsets.symmetric(horizontal: width8,vertical: height8),
                                                 child:
                                                     BookDetailsPageFormal(book),
                                               ),
@@ -178,12 +204,12 @@ class _BookScreenStateNew extends AbstractSearchBookState<BookScreen> {
                                     wrapInAnimation(
                                         Padding(
                                           padding:  EdgeInsets.only(
-                                              left: Dimensions.width10, right: Dimensions.width10, top: Dimensions.height20, bottom:Dimensions.height20 ),
+                                              left: width10, right: width10, top: height20, bottom:height20 ),
                                           child: Text(
                                             "Top books ",
                                             style: textStyle.copyWith(
 
-                                               fontSize: Dimensions.height20,
+                                               fontSize: height20,
                                               fontWeight: FontWeight.w400
                                             ),
                                           ),
@@ -215,7 +241,7 @@ class _BookScreenStateNew extends AbstractSearchBookState<BookScreen> {
                             : isLoading == true
                                 ? Column(
                                     children: [
-                                      SizedBox(height: Dimensions.height100),
+                                      SizedBox(height: height100),
                                       Center(
                                         child: CircularProgressIndicator(),
                                       )
@@ -264,8 +290,13 @@ class _BookScreenStateNew extends AbstractSearchBookState<BookScreen> {
   }
 
   Widget getGridForCategories() {
+    double pageWidth = MediaQuery.of(context).size.width;
+    double pageHeight = MediaQuery.of(context).size.height;
+    double width8 = pageWidth / 49;
+    double height8 = pageHeight /100.75;
+
     return Padding(
-      padding:  EdgeInsets.symmetric(horizontal: Dimensions.width8, vertical: Dimensions.height8),
+      padding:  EdgeInsets.symmetric(horizontal: width8, vertical: height8),
       child: Wrap(
           children: bookStore.category.map((e) {
             return Observer(builder: (context) {
@@ -283,8 +314,11 @@ class _BookScreenStateNew extends AbstractSearchBookState<BookScreen> {
   }
 
   Widget getExpandedCategories(List<Category> categories) {
+
+    double pageWidth = MediaQuery.of(context).size.width;
+    double width10 = pageWidth / 39.2;
     return Wrap(
-      runSpacing: 10,
+      runSpacing: width10,
         // spacing: 5,
         children: categories.map((e) {
           return Observer(builder: (context) {
@@ -301,6 +335,12 @@ class _BookScreenStateNew extends AbstractSearchBookState<BookScreen> {
   }
 
   _buildExpandable() {
+    double pageWidth = MediaQuery.of(context).size.width;
+    double pageHeight = MediaQuery.of(context).size.height;
+    double height8 = pageHeight /100.75;
+    double width24 = pageWidth /16.3;
+    double height18 = pageHeight /44.77;
+    double width16 = pageWidth /24.5;
     return ExpandableNotifier(
       child: Expandable(
         collapsed: Wrap(
@@ -308,7 +348,7 @@ class _BookScreenStateNew extends AbstractSearchBookState<BookScreen> {
           children: [
             getExpandedCategories(bookStore.allCategories.sublist(0, 5)),
             Padding(
-              padding:  EdgeInsets.only(right: Dimensions.width24, top: Dimensions.height8),
+              padding:  EdgeInsets.only(right: width24, top: height8),
               child: Align(
                 alignment: Alignment.centerRight,
                 child: ExpandableButton(
@@ -316,7 +356,7 @@ class _BookScreenStateNew extends AbstractSearchBookState<BookScreen> {
                     "see all >",
                     textAlign: TextAlign.end,
                     style: TextStyle(
-                      fontSize: Dimensions.height18,
+                      fontSize: height18,
                       fontWeight: FontWeight.w400,
                       //fontFamily: GoogleFonts.ibarraRealNova().fontFamily,
                       color: AppColors.lightBlueColor,
@@ -335,7 +375,7 @@ class _BookScreenStateNew extends AbstractSearchBookState<BookScreen> {
               // getExpandedCategories(bookStore.allCategories.sublist(5, )),
               // getExpandedCategories(bookStore.allCategories.sublist(6, 9)),
               Padding(
-                padding:  EdgeInsets.only(right: Dimensions.width16),
+                padding:  EdgeInsets.only(right: width16),
                 child: Align(
                     alignment: Alignment.bottomRight,
                     child: ExpandableButton(
